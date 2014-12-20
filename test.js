@@ -101,7 +101,7 @@ describe('exec-cmd:', function() {
       .catch(function(stderr) {
         strictEqual(stderr instanceof Error, true);
         strictEqual(stderr.name, 'CommandError');
-        strictEqual(stderr.status, 1);
+        notStrictEqual(stderr, '');
         done();
       });
     });
