@@ -14,7 +14,18 @@ $ npm test
 
 
 ## Usage
-## API / CLI
+```js
+var exec = require('exec-cmd');
+var promise = exec('echo', [
+  'hello world'
+])
+.then(function(stdout) {
+  //=> 'hello world'
+})
+.catch(function(stderr) {
+  //=> ''
+})
+```
 
 
 ## Author
