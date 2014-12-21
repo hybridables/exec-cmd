@@ -1,6 +1,6 @@
 {
   "name": "exec-cmd",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple, fast and cross-platform executing commands (with child_process spawn) using Bluebird or Native Promise",
   "scripts": {
     "lint": "jshint . && jscs . --reporter inline",

@@ -1,3 +1,6 @@
+## v1.0.3 / December 21, 2014
+- fix badge`s heading
+
 ## v1.0.2 / December 21, 2014
 - istabul ignores, coverage
 - switch to `native-or-another`, bump deps
