@@ -41,10 +41,10 @@
   },
   "dependencies": {
     "cross-spawn": "^0.2.3",
-    "native-or-bluebird": "^1.1.2"
+    "native-or-another": "^2.0.0"
   },
   "devDependencies": {
-    "bluebird": "^2.4.0",
+    "bluebird": "^2.4.1",
     "istanbul-harmony": "^0.3.1",
     "mocha": "^2.0.1",
     "mocha-lcov-reporter": "0.0.1"

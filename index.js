@@ -9,7 +9,7 @@
 
 var assert = require('assert');
 var spawn = require('cross-spawn');
-var Promize = require('native-or-bluebird');
+var Deferred = require('native-or-another');
 
 module.exports = function execCmd(cmd, args, opts) {
   var stdout = new Buffer('');
@@ -22,7 +22,7 @@ module.exports = function execCmd(cmd, args, opts) {
   assert(Array.isArray(args), 'exec-cmd: `args` must be array');
   assert(typeof opts === 'object', 'exec-cmd: `opts` must be object');
 
-  var deferred = new PromiseDeferred();
+  var defer = new Deferred();
   var cp = spawn(cmd, args, opts);
 
   cp.stdout.on('data', function indexOnSTDOUT(data) {
@@ -33,7 +33,7 @@ module.exports = function execCmd(cmd, args, opts) {
   });
 
   cp.on('error', function indexOnError(err) {
-    return deferred.reject(err);
+    return defer.reject(err);
   });
 
   cp.on('close', function indexOnClose(code) {
@@ -41,10 +41,10 @@ module.exports = function execCmd(cmd, args, opts) {
     stderr = stderr.toString();
 
     if (!code) {
-      return deferred.resolve(stdout);
+      return defer.resolve(stdout);
     }
 
-    return deferred.reject(new CommandError({
+    return defer.reject(new CommandError({
       status: code,
       stdout: stdout,
       stderr: stderr,
@@ -53,22 +53,8 @@ module.exports = function execCmd(cmd, args, opts) {
     }));
   });
 
-  deferred.promise.cp = cp;
-  return deferred.promise;
-}
-
-function PromiseDeferred() {
-  var resolve = null;
-  var reject = null;
-  var promise = new Promize(function() {
-    resolve = arguments[0];
-    reject = arguments[1];
-  });
-  return {
-    resolve: resolve,
-    reject: reject,
-    promise: promise
-  };
+  defer.promise.cp = cp;
+  return defer.promise;
 }
 
 function CommandError(opts) {
