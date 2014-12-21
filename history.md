@@ -1,3 +1,7 @@
+## v1.0.2 / December 21, 2014
+- istabul ignores, coverage
+- switch to `native-or-another`, bump deps
+
 ## v1.0.1 / December 20, 2014
 - fix test `fail on error code != 0` failing on travis
 
