@@ -32,7 +32,9 @@ describe('exec-cmd:', function() {
         done();
       })
       .catch(function(stderr) {
+        /* istanbul ignore next */
         notStrictEqual(stderr.trim(), 'hello world');
+        /* istanbul ignore next */
         done();
       })
     });
@@ -46,8 +48,11 @@ describe('exec-cmd:', function() {
         done();
       })
       .catch(function(stderr) {
+        /* istanbul ignore next */
         notStrictEqual(stderr, 'hello world');
+        /* istanbul ignore next */
         notStrictEqual(stderr, '');
+        /* istanbul ignore next */
         done(stderr);
       })
     });
@@ -63,6 +68,7 @@ describe('exec-cmd:', function() {
         return done();
       }
 
+      /* istanbul ignore next */
       var promise = exec(path.join(__dirname, 'fixtures/foo.bat')) // Should expand to foo.bat
         .then(function(stdout) {
           strictEqual(stdout, 'foo');
@@ -84,8 +90,11 @@ describe('exec-cmd:', function() {
         done();
       })
       .catch(function(stderr) {
+        /* istanbul ignore next */
         notStrictEqual(stderr, 'こんにちは');
+        /* istanbul ignore next */
         notStrictEqual(stderr, '');
+        /* istanbul ignore next */
         done(stderr);
       });
     });
@@ -95,7 +104,9 @@ describe('exec-cmd:', function() {
         path.join(__dirname, 'fixtures/fail')
       ])
       .then(function(stdout) {
+        /* istanbul ignore next */
         strictEqual(stdout, '');
+        /* istanbul ignore next */
         done();
       })
       .catch(function(stderr) {

@@ -28,10 +28,12 @@ module.exports = function execCmd(cmd, args, opts) {
   cp.stdout.on('data', function indexOnSTDOUT(data) {
     stdout = Buffer.concat([stdout, data]);
   });
+
   cp.stderr.on('data', function indexOnSTDERR(data) {
     stderr = Buffer.concat([stderr, data]);
   });
 
+  /* istanbul ignore next */
   cp.on('error', function indexOnError(err) {
     return defer.reject(err);
   });
