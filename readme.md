@@ -1,8 +1,4 @@
-[![npm version][npmjs-img]][npmjs-url]
-[![mit license][license-img]][license-url]
-[![build status][travis-img]][travis-url]
-[![coverage status][coveralls-img]][coveralls-url]
-[![deps status][daviddm-img]][daviddm-url]
+## [![npm versi][npmjs-img]][npmjs-url] [![mit license][license-img]][license-url] [![build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![deps status][daviddm-img]][daviddm-url]
 
 > Simple, fast and cross-platform executing commands (with child_process spawn) using Bluebird or Native Promise
 
@@ -67,4 +63,4 @@ Released under the [`MIT`][license-url] license.
 
 ***
 
-_Powered and automated by [readdirp + hogan.js](https://github.com/tunnckoCore), December 20, 2014_
+_Powered and automated by [readdirp + hogan.js](https://github.com/tunnckoCore), December 21, 2014_
