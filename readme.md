@@ -64,3 +64,7 @@ Released under the [`MIT`][license-url] license.
 
 [contrib-more]: http://j.mp/1stW47C
 [contrib-graf]: https://github.com/tunnckoCore/exec-cmd/graphs/contributors
+
+***
+
+_Powered and automated by [readdirp + hogan.js](https://github.com/tunnckoCore), December 20, 2014_
