@@ -1,6 +1,7 @@
 ## [![npm versi][npmjs-img]][npmjs-url] [![mit license][license-img]][license-url] [![build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![deps status][daviddm-img]][daviddm-url]
 
-> Simple, fast and cross-platform executing commands (with child_process spawn) using Bluebird or Native Promise
+> Simple, fast and cross-platform executing commands (with child_process spawn) using Bluebird or Native Promise. **The package is [hybrid][hybridify] - with [hybridify][hybridify] api!**
+
 
 ## Install
 ```bash
@@ -34,7 +35,7 @@ var promise = exec('echo', [
 
 
 ## License [![MIT license][license-img]][license-url]
-Copyright (c) 2014 [Charlike Mike Reagent][contrib-more], [contributors][contrib-graf].  
+Copyright (c) 2015 [Charlike Mike Reagent][contrib-more], [contributors][contrib-graf].  
 Released under the [`MIT`][license-url] license.
 
 
@@ -64,3 +65,6 @@ Released under the [`MIT`][license-url] license.
 ***
 
 _Powered and automated by [readdirp + hogan.js](https://github.com/tunnckoCore), December 21, 2014_
+
+
+[hybridify]: https://github.com/tunnckoCore/hybridify
