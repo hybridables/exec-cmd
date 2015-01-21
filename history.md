@@ -1,3 +1,8 @@
+## v1.0.4 / January 21, 2015
+- make it **hybrid** (with hybrid api) using `hybridify`
+- add more keywords
+- update license year and dotfiles
+
 ## v1.0.3 / December 21, 2014
 - fix badge`s heading
 
