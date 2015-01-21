@@ -10,8 +10,21 @@
 var assert = require('assert');
 var spawn = require('cross-spawn');
 var Deferred = require('native-or-another');
+var handleCallback = require('handle-callback');
+var handleArguments = require('handle-arguments');
 
-module.exports = function execCmd(cmd, args, opts) {
+module.exports = function hybridExecCmd() {
+  var argz = handleArguments(arguments);
+  var promise = execCmd.apply(this, argz.args);
+
+  if (argz.callback) {
+    promise = handleCallback(promise, argz.callback);
+  }
+
+  return promise;
+}
+
+function execCmd(cmd, args, opts) {
   var stdout = new Buffer('');
   var stderr = new Buffer('');
 

@@ -41,6 +41,8 @@
   },
   "dependencies": {
     "cross-spawn": "^0.2.3",
+    "handle-arguments": "^1.0.2",
+    "handle-callback": "^1.0.1",
     "native-or-another": "^2.0.0"
   },
   "devDependencies": {

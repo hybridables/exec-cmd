@@ -39,6 +39,25 @@ describe('exec-cmd:', function() {
       })
     });
 
+    it('should be with hybrid api', function(done) {
+      var promise = exec('echo', [
+        'hello world'
+      ], function(err, res) {
+        assert(!err)
+        strictEqual(res.trim(), 'hello world');
+      })
+      .then(function(stdout) {
+        strictEqual(stdout.trim(), 'hello world');
+        done();
+      })
+      .catch(function(stderr) {
+        /* istanbul ignore next */
+        notStrictEqual(stderr.trim(), 'hello world');
+        /* istanbul ignore next */
+        done();
+      })
+    });
+
     it('should pass args to node fixtures/hellow-world.js', function(done) {
       var promise = exec('node', [
         './fixtures/hello-world.js', 'hello world'
