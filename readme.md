@@ -22,6 +22,25 @@ var promise = exec('echo', [
 .catch(function(stderr) {
   //=> ''
 })
+
+var promise = exec('echo', [
+  'hello world'
+], function(err, res) {
+  assert(!err)
+  // console.log('from cb')
+  strictEqual(res.trim(), 'hello world');
+})
+.then(function(stdout) {
+  // console.log('from then (promise)')
+  strictEqual(stdout.trim(), 'hello world');
+  done();
+})
+.catch(function(stderr) {
+  /* istanbul ignore next */
+  notStrictEqual(stderr.trim(), 'hello world');
+  /* istanbul ignore next */
+  done();
+})
 ```
 
 
