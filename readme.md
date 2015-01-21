@@ -64,7 +64,7 @@ Released under the [`MIT`][license-url] license.
 
 ***
 
-_Powered and automated by [readdirp + hogan.js](https://github.com/tunnckoCore), December 21, 2014_
+_Powered and automated by [kdf](https://github.com/tunnckoCore), January 21, 2015_
 
 
 [hybridify]: https://github.com/tunnckoCore/hybridify
