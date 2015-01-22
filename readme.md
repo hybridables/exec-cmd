@@ -1,6 +1,6 @@
 ## [![npm versi][npmjs-img]][npmjs-url] [![mit license][license-img]][license-url] [![build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![deps status][daviddm-img]][daviddm-url]
 
-> Simple, fast and cross-platform executing commands (with child_process spawn) using Bluebird or Native Promise. **The package is [hybrid][hybridify] - with [hybridify][hybridify] api!**
+> Flexible and cross-platform executing commands. **[Hybrid][hybridify], Async and Promise API.**
 
 
 ## Install
