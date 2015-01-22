@@ -11,6 +11,7 @@ $ npm test
 
 
 ## Usage
+> For more use-cases see the [tests](./test.js)
 ```js
 var exec = require('exec-cmd');
 var promise = exec('echo', [
@@ -40,6 +41,36 @@ var promise = exec('echo', [
   notStrictEqual(stderr.trim(), 'hello world');
   /* istanbul ignore next */
   done();
+})
+```
+
+
+## API
+### [.execCmd](./index.js#L44)
+> Hybrid execute command via spawn
+
+* `<cmd>` **{String}**  
+* `<args>` **{Array|Function}**  
+* `[opts]` **{Object|Function}**  
+* `[callback]` **{Function}**  
+* `returns`: {Promise}  
+
+**Example:**
+
+```js
+var exec = require('exec-cmd');
+var promise = exec('echo', [
+  'hello world'
+], function __cb(err, res) {
+  // as usual
+})
+.then(function(res) {
+  //=> res[0] is code
+  //=> res[1] is stdout
+  //=> res[1] === 'hello world'
+})
+.catch(function(err) {
+  //=> null || undefined?
 })
 ```
 
@@ -83,7 +114,7 @@ Released under the [`MIT`][license-url] license.
 
 ***
 
-_Powered and automated by [kdf](https://github.com/tunnckoCore), January 21, 2015_
+_Powered and automated by [kdf](https://github.com/tunnckoCore), January 22, 2015_
 
 
 [hybridify]: https://github.com/tunnckoCore/hybridify

@@ -1,14 +1,14 @@
 /**
  * exec-cmd <https://github.com/tunnckoCore/exec-cmd>
  *
- * Copyright (c) 2014 Charlike Mike Reagent, contributors.
+ * Copyright (c) 2015 Charlike Mike Reagent, contributors.
  * Licensed under the MIT license.
  */
 
 'use strict';
 
 var path = require('path');
-var exec = require('./index');
+var execCmd = require('./index');
 var assert = require('assert');
 
 var isWin = process.platform === 'win32';
@@ -18,68 +18,58 @@ var notStrictEqual = assert.notStrictEqual;
 describe('exec-cmd:', function() {
   describe('api', function() {
     it('should handle optional `args` and `options`', function(done) {
-      var promise = exec('echo');
+      var promise = execCmd('echo');
+
       strictEqual(typeof promise.then, 'function');
       done();
     });
 
     it('should handle optional `options`', function(done) {
-      var promise = exec('echo', [
+      var promise = execCmd('echo', [
         'hello world'
       ])
-      .then(function(stdout) {
+      .then(function(res) {
+        var stdout = res[1];
+        var code = res[0];
+
+        strictEqual(code, 0);
         strictEqual(stdout.trim(), 'hello world');
-        done();
-      })
-      .catch(function(stderr) {
-        /* istanbul ignore next */
-        notStrictEqual(stderr.trim(), 'hello world');
-        /* istanbul ignore next */
         done();
       })
     });
 
-    it('should be with hybrid api', function(done) {
-      var promise = exec('echo', [
+    it('should be hybrid', function(done) {
+      var promise = execCmd('echo', [
         'hello world'
       ], function(err, res) {
+        var stdout = res[1];
+        var code = res[0];
+          strictEqual(code, 0);
         assert(!err)
-        strictEqual(res.trim(), 'hello world');
+        strictEqual(stdout.trim(), 'hello world');
       })
-      .then(function(stdout) {
+      .then(function(res) {
+        var stdout = res[1];
+        var code = res[0];
+
+        strictEqual(code, 0);
         strictEqual(stdout.trim(), 'hello world');
         done();
       })
-      .catch(function(stderr) {
-        /* istanbul ignore next */
-        notStrictEqual(stderr.trim(), 'hello world');
-        /* istanbul ignore next */
-        done();
-      })
     });
 
-    it('should pass args to node fixtures/hellow-world.js', function(done) {
-      var promise = exec('node', [
+    it('should pass args to `node fixtures/hello-world.js`', function(done) {
+      var promise = execCmd('node', [
         './fixtures/hello-world.js', 'hello world'
       ])
-      .then(function(stdout) {
-        strictEqual(stdout, 'hello world');
+      .then(function(res) {
+        var stdout = res[1];
+        var code = res[0];
+
+        strictEqual(code, 0);
+        strictEqual(stdout.trim(), 'hello world');
         done();
       })
-      .catch(function(stderr) {
-        /* istanbul ignore next */
-        notStrictEqual(stderr, 'hello world');
-        /* istanbul ignore next */
-        notStrictEqual(stderr, '');
-        /* istanbul ignore next */
-        done(stderr);
-      })
-    });
-
-    it('should give access to the underlying child process', function(done) {
-      var promise = exec('echo');
-      strictEqual(typeof promise.cp.kill, 'function');
-      done();
     });
 
     it('should expand using PATH_EXT properly', function(done) {
@@ -88,50 +78,66 @@ describe('exec-cmd:', function() {
       }
 
       /* istanbul ignore next */
-      var promise = exec(path.join(__dirname, 'fixtures/foo.bat')) // Should expand to foo.bat
-        .then(function(stdout) {
-          strictEqual(stdout, 'foo');
+      var promise = execCmd(path.join(__dirname, 'fixtures/foo.bat')) // Should expand to foo.bat
+        .then(function(res) {
+          var stdout = res[1];
+          var code = res[0];
+
+          strictEqual(code, 0);
+          strictEqual(stdout.trim(), 'foo');
           done();
         })
-        .catch(function(stderr) {
-          notStrictEqual(stderr, 'foo');
-          notStrictEqual(stderr, '');
-          done(stderr);
+        .catch(function(err) {
+          notStrictEqual(err, 'foo');
+          notStrictEqual(err, '');
+          done(err);
         });
     });
 
     it('should handle multibyte properly', function(done) {
-      var promise = exec('node', [
+      var promise = execCmd('node', [
         path.join(__dirname, 'fixtures/multibyte')
       ])
-      .then(function(stdout) {
+      .then(function(res) {
+        var stdout = res[1];
+        var code = res[0];
+
+        strictEqual(code, 0);
         strictEqual(stdout, 'こんにちは');
         done();
       })
-      .catch(function(stderr) {
+      .catch(function(err) {
         /* istanbul ignore next */
-        notStrictEqual(stderr, 'こんにちは');
+        notStrictEqual(err, 'こんにちは');
         /* istanbul ignore next */
-        notStrictEqual(stderr, '');
+        notStrictEqual(err, '');
         /* istanbul ignore next */
-        done(stderr);
+        done(err);
       });
     });
 
     it('should fail on error code != 0', function(done) {
-      var promise = exec('node', [
+      var promise = execCmd('node', [
         path.join(__dirname, 'fixtures/fail')
       ])
-      .then(function(stdout) {
+      .then(function(res) {
         /* istanbul ignore next */
-        strictEqual(stdout, '');
+        var stdout = res[1];
+        /* istanbul ignore next */
+        var code = res[0];
+        /* istanbul ignore next */
+        strictEqual(code, 0);
+        /* istanbul ignore next */
+        strictEqual(res[1], '');
+        /* istanbul ignore next */
+        assert(!code);
         /* istanbul ignore next */
         done();
       })
-      .catch(function(stderr) {
-        strictEqual(stderr instanceof Error, true);
-        strictEqual(stderr.name, 'CommandError');
-        notStrictEqual(stderr, '');
+      .catch(function(err) {
+        strictEqual(err instanceof Error, true);
+        strictEqual(err.name, 'CommandError');
+        notStrictEqual(err, '');
         done();
       });
     });

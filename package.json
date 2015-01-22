@@ -1,7 +1,7 @@
 {
   "name": "exec-cmd",
   "version": "1.0.4",
-  "description": "Simple, fast and cross-platform executing commands (with child_process spawn) using Bluebird or Native Promise",
+  "description": "Flexible and cross-platform executing commands. Hybrid. Async and Promise API.",
   "scripts": {
     "lint": "jshint . && jscs . --reporter inline",
     "test": "mocha",
@@ -21,7 +21,11 @@
     "api",
     "apis",
     "aplus",
+    "async",
     "bluebird",
+    "callback",
+    "callbacks",
+    "cb",
     "cmd",
     "cmds",
     "command",
@@ -49,10 +53,8 @@
     "url": "https://github.com/tunnckoCore/exec-cmd/blob/master/license.md"
   },
   "dependencies": {
-    "cross-spawn": "^0.2.3",
-    "handle-arguments": "^1.0.2",
-    "handle-callback": "^1.0.1",
-    "native-or-another": "^2.0.0"
+    
+    "hybridify": "^1.0.0"
   },
   "devDependencies": {
     "bluebird": "^2.4.1",
