@@ -53,13 +53,13 @@
     "url": "https://github.com/tunnckoCore/exec-cmd/blob/master/license.md"
   },
   "dependencies": {
-    "async-exec-cmd": "^1.0.0",
-    "hybridify": "^1.0.0"
+    "async-exec-cmd": "^0.0.x",
+    "hybridify": "^1.0.x"
   },
   "devDependencies": {
     "bluebird": "^2.4.1",
     "istanbul-harmony": "^0.3.1",
-    "mocha": "^2.0.1",
+    "mocha": "*",
     "mocha-lcov-reporter": "0.0.1"
   }
 }
