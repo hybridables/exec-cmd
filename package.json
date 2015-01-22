@@ -1,6 +1,6 @@
 {
   "name": "exec-cmd",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Flexible and cross-platform executing commands. Hybrid. Async and Promise API.",
   "scripts": {
     "lint": "jshint index.js && jscs index.js --reporter inline",

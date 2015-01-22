@@ -1,3 +1,13 @@
+## v1.0.5 / January 22, 2015
+- fix version ranges
+- fix api docs/docblocks
+- fix api docs
+- edit description
+- edit `scripts`
+- add `async-exec-cmd`
+- just move async logic to `async-exec-cmd`
+
+
 ## v1.0.4 / January 21, 2015
 - make it **hybrid** (with hybrid api) using `hybridify`
 - add more keywords
