@@ -47,7 +47,7 @@ var promise = exec('echo', [
 
 
 ## API
-### [.execCmd](./index.js#L44)
+### [.execCmd](./index.js#L43)
 > Hybrid execute command via spawn
 
 * `<cmd>` **{String}**  

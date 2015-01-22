@@ -7,7 +7,6 @@
 
 'use strict';
 
-var assert = require('assert');
 var asyncExecCmd = require('async-exec-cmd');
 var hybridify = require('hybridify');
 
