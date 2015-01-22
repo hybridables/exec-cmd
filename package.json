@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "description": "Flexible and cross-platform executing commands. Hybrid. Async and Promise API.",
   "scripts": {
-    "lint": "jshint . && jscs . --reporter inline",
+    "lint": "jshint index.js && jscs index.js --reporter inline",
     "test": "mocha",
     "test-cov": "istanbul cover _mocha",
     "test-travis": "istanbul cover _mocha --report lcovonly"
