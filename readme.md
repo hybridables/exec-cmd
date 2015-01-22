@@ -54,7 +54,7 @@ var promise = exec('echo', [
 * `<args>` **{Array|Function}**  
 * `[opts]` **{Object|Function}**  
 * `[callback]` **{Function}**  
-* `returns`: {Promise}  
+* `returns` **{Promise}**  
 
 **Example:**
 
