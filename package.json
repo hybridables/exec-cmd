@@ -53,7 +53,7 @@
     "url": "https://github.com/tunnckoCore/exec-cmd/blob/master/license.md"
   },
   "dependencies": {
-    
+    "async-exec-cmd": "^1.0.0",
     "hybridify": "^1.0.0"
   },
   "devDependencies": {
