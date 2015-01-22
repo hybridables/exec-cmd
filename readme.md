@@ -12,6 +12,7 @@ $ npm test
 
 ## Usage
 > For more use-cases see the [tests](./test.js)
+
 ```js
 var exec = require('exec-cmd');
 var promise = exec('echo', [
