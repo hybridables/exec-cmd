@@ -1,5 +1,11 @@
 
 
+## v2.0.0 / January 30, 2015
+- Release v2.0.0 / npm@v2.0.0
+- update dependencies - bumping major, because the breaking change in `async-exec-cmd`
+- update docs
+- update tests
+
 ## v1.0.6 / January 26, 2015
 - Release v1.0.6 / npm@v1.0.6
 - update links, because the transfer tunnckoCore -> hybridables
