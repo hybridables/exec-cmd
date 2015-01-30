@@ -53,8 +53,12 @@
     "url": "https://github.com/hybridables/exec-cmd/blob/master/license.md"
   },
   "dependencies": {
-    "async-exec-cmd": "^0.0.x",
-    "hybridify": "^1.0.x"
+    "async-exec-cmd": "~2.0.0",
+    "cleanup-coverage-code": "~1.0.2",
+    "handle-arguments": "~2.0.0",
+    "hybridify": "~1.0.0",
+    "is-empty-function": "~1.0.3",
+    "parse-function": "~2.0.0"
   },
   "devDependencies": {
     "bluebird": "^2.4.1",
