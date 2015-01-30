@@ -4,75 +4,69 @@
 
 
 ## Install
-```bash
-$ npm install exec-cmd
-$ npm test
 ```
-
-
-## Usage
-> For more use-cases see the [tests](./test.js)
-
-```js
-var exec = require('exec-cmd');
-var promise = exec('echo', [
-  'hello world'
-])
-.then(function(stdout) {
-  //=> 'hello world'
-})
-.catch(function(stderr) {
-  //=> ''
-})
-
-var promise = exec('echo', [
-  'hello world'
-], function(err, res) {
-  assert(!err)
-  // console.log('from cb')
-  strictEqual(res.trim(), 'hello world');
-})
-.then(function(stdout) {
-  // console.log('from then (promise)')
-  strictEqual(stdout.trim(), 'hello world');
-  done();
-})
-.catch(function(stderr) {
-  /* istanbul ignore next */
-  notStrictEqual(stderr.trim(), 'hello world');
-  /* istanbul ignore next */
-  done();
-})
+npm i --save exec-cmd
+npm test
 ```
 
 
 ## API
-### [execCmd](./index.js#L43)
-> Hybrid execute command via spawn
+> For more use-cases see the [tests](./test.js)
 
-* `<cmd>` **{String}**  
-* `<args>` **{Array|Function}**  
-* `[opts]` **{Object|Function}**  
-* `[callback]` **{Function}**  
-* `returns` **{Promise}**  
+### [execCmd](./index.js#L43)
+> Hybrid execute command via spawn. Actually this is [hybridify wrapper][hybridify] for [async-exec-cmd][async-exec-cmd], so for more detailed information see [async-exec-cmd readme][async-readme]
+
+- `<cmd>` **{String}**
+- `[args]` **{Array}**
+- `[opts]` **{Object}**
+- `[cb]` **{Function}**
+- `returns` **{Promise}**
 
 **Example:**
+> The command will directly output `"Hello world!"`, because `stdio: inherit`, so `res[0]` which
+is the actual response of execution, will be empty string `''`.
 
 ```js
-var exec = require('exec-cmd');
-var promise = exec('echo', [
-  'hello world'
-], function __cb(err, res) {
-  // as usual
-})
+var run = require('exec-cmd');
+var promise = run('echo "Hello world!"', {stdio: 'inherit'})
+
+promise
 .then(function(res) {
-  //=> res[0] is code
-  //=> res[1] is stdout
-  //=> res[1] === 'hello world'
+  var stdout = res[0];
+  var code = res[1];
+  var buffer = res[2];
+
+  console.log(stdout, code, buffer);
+  //=> '' 0 <Buffer >
 })
-.catch(function(err) {
-  //=> null || undefined?
+.catch(console.error)
+```
+
+**More advanced example**
+> Say we want to install [bluebird][bluebird] as dev dependency and after that uninstall it.
+
+```js
+var run = require('exec-cmd');
+
+run('npm install', ['--save-dev', 'bluebird'])
+.then(function(arr) {
+  var res = arr[0];
+  var code = arr[1];
+  var buffer = arr[2];
+
+  console.log(res);
+  //=> 'bluebird@2.9.3 node_modules/bluebird'
+
+  // So we now want to uninstall it,
+  // but we want to show response directly on console (stdout)
+  return run('npm', ['uninstall', '--save-dev', 'bluebird'], {stdio: 'inherit'})
 })
+.then(function(arr) {
+  // not need to console.log something,
+  // it will directly output this
+  //=> unbuild bluebird@2.9.3
+})
+.catch(console.error)
 ```
 
 
@@ -115,7 +109,9 @@ Released under the [`MIT`][license-url] license.
 
 ***
 
-_Powered and automated by [kdf](https://github.com/tunnckoCore), January 26, 2015_
-
+_Powered and automated by [kdf](https://github.com/tunnckoCore), January 30, 2015_
 
 [hybridify]: https://github.com/hybridables/hybridify
+[async-readme]: https://github.com/tunnckoCore/async-exec-cmd#asyncexeccmd
+[async-exec-cmd]: https://github.com/tunnckoCore/async-exec-cmd
+[bluebird]: https://github.com/petkaantonov/bluebird

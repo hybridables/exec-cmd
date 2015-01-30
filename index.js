@@ -11,26 +11,9 @@ var asyncExecCmd = require('async-exec-cmd');
 var hybridify = require('hybridify');
 
 /**
- * Hybrid execute command via spawn
- *
- * **Example:**
- *
- * ```js
- * var exec = require('exec-cmd');
- * var promise = exec('echo', [
- *   'hello world'
- * ], function __cb(err, res) {
- *   // as usual
- * })
- * .then(function(res) {
- *   //=> res[0] is code
- *   //=> res[1] is stdout
- *   //=> res[1] === 'hello world'
- * })
- * .catch(function(err) {
- *   //=> null || undefined?
- * })
- * ```
+ * > Hybrid execute command via spawn. Actually this is [hybridify wrapper][hybridify]
+ * for [async-exec-cmd][async-exec-cmd], so for more detailed information
+ * see [async-exec-cmd readme][async-readme]
  *
  * @name execCmd
  * @param  {String}          `<cmd>`
