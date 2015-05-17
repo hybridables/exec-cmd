@@ -1,6 +1,6 @@
 {
   "name": "exec-cmd",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Flexible and cross-platform executing commands. Hybrid, Async and Promise API.",
   "scripts": {
     "test": "standard && node test.js"
@@ -50,8 +50,8 @@
     "url": "https://github.com/hybridables/exec-cmd/blob/master/LICENSE.md"
   },
   "dependencies": {
-    "async-exec-cmd": "^2.0.2",
-    "hybridify": "^1.0.9"
+    "async-exec-cmd": "~2.0.2",
+    "hybridify": "~1.0.9"
   },
   "devDependencies": {
     "assertit": "^0.1.0"

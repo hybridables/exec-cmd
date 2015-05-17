@@ -1,5 +1,13 @@
 
 
+## 2.0.1 - 2015-05-17
+- Release v2.0.1 / npm@v2.0.1
+- update license year
+- update changelog
+- update readme/docs
+- update repo template
+- update code style, apply feross/standard
+
 ## 2.0.0 - 2015-01-30
 - Release v2.0.0 / npm@v2.0.0
 - update dependencies - bumping major, because the breaking change in `async-exec-cmd`
