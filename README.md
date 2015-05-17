@@ -12,11 +12,63 @@ npm test
 ```
 
 
-## Usage
+## API
 > For more use-cases see the [tests](./test.js)
 
+### [execCmd](./index.js#L46)
+> Hybrid execute command via spawn. Actually this is [hybridify wrapper][hybridify] for [async-exec-cmd][async-exec-cmd], so for more detailed information see [async-exec-cmd readme][async-exec-cmd]
+
+- `<cmd>` **{String}** command to execute
+- `[args]` **{Array}** sub-commands or flags, you also can pass them to `cmd`
+- `[opts]` **{Object}** options to pass to cross-spawn and child_process.spawn
+- `[cb]` **{Function}** optional node style callback
+- `returns` **{Promise}**
+
+**Example:**
+> The command will directly output `"Hello world!"`, because `stdio: inherit`, so `res[0]` which
+is the actual response of execution, will be empty string `''`.
+
 ```js
-var execCmd = require('exec-cmd');
+var run = require('exec-cmd')
+var promise = run('echo "Hello world!"', {stdio: 'inherit'})
+
+promise
+.then(function(res) {
+  var stdout = res[0]
+  var code = res[1]
+  var buffer = res[2]
+
+  console.log(stdout, code, buffer)
+  //=> '' 0 <Buffer >
+})
+.catch(console.error)
+```
+
+**More advanced example**
+> Say we want to install [bluebird][bluebird] as dev dependency and after that uninstall it.
+
+```js
+var run = require('exec-cmd');
+
+run('npm install', ['--save-dev', 'bluebird'])
+.then(function(arr) {
+  var res = arr[0];
+  var code = arr[1];
+  var buffer = arr[2];
+
+  console.log(res);
+  //=> 'bluebird@2.9.3 node_modules/bluebird'
+
+  // So we now want to uninstall it,
+  // but we want to show response directly on console (stdout)
+  return run('npm', ['uninstall', '--save-dev', 'bluebird'], {stdio: 'inherit'})
+})
+.then(function(arr) {
+  // not need to console.log something,
+  // it will directly output this
+  //=> unbuild bluebird@2.9.3
+})
+.catch(console.error)
 ```
 
 
@@ -77,3 +129,4 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 
 [hybridify]: https://github.com/hybridables/hybridify
 [async-exec-cmd]: https://github.com/tunnckoCore/async-exec-cmd
+[bluebird]: https://github.com/petkaantonov/bluebird

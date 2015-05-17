@@ -16,7 +16,6 @@ var hybridify = require('hybridify')
  * see [async-exec-cmd readme][async-exec-cmd]
  *
  * **Example**
- *
  * > The command will directly output `"Hello world!"`, because `stdio: inherit`, so `res[0]` which
  * is the actual response of execution, will be empty string `''`.
  *
@@ -37,10 +36,10 @@ var hybridify = require('hybridify')
  * ```
  *
  * @name execCmd
- * @param  {String}          `<cmd>`
- * @param  {Array|Function}  `[args]`
- * @param  {Object|Function} `[opts]`
- * @param  {Function}        `[callback]`
+ * @param  {String}          `<cmd>` command to execute
+ * @param  {Array|Function}  `[args]` sub-commands or flags, you also can pass them to `cmd`
+ * @param  {Object|Function} `[opts]` options to pass to cross-spawn and child_process.spawn
+ * @param  {Function}        `[callback]` optional node style callback
  * @return {Promise}
  * @api public
  */
