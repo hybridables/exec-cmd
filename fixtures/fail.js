@@ -1,1 +1,1 @@
-throw new Error('custom error msg');
+throw new Error('custom error msg')

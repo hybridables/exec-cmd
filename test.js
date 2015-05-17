@@ -1,144 +1,127 @@
-/**
- * exec-cmd <https://github.com/tunnckoCore/exec-cmd>
+/*!
+ * exec-cmd <https://github.com/hybridables/exec-cmd>
  *
  * Copyright (c) 2015 Charlike Mike Reagent, contributors.
- * Licensed under the MIT license.
+ * Released under the MIT license.
  */
 
-'use strict';
+/* jshint asi:true */
 
-var path = require('path');
-var run = require('./index');
-var assert = require('assert');
+'use strict'
 
-var strictEqual = assert.strictEqual;
-var notStrictEqual = assert.notStrictEqual;
+var path = require('path')
+var test = require('assertit')
+var execCmd = require('./index')
 
-describe('exec-cmd:', function() {
-  describe('api', function() {
-    it('should handle optional `args` and `options`', function(done) {
-      var promise = run('echo');
+test('should handle optional `args` and `options`', function (done) {
+  var promise = execCmd('echo')
 
-      strictEqual(typeof promise.then, 'function');
-      done();
-    });
+  test.equal(typeof promise.then, 'function')
+  test.equal(typeof promise.hybridify, 'function')
+  done()
+})
 
-    it('should handle optional `options`', function(done) {
-      var promise = run('echo', [
-        'hello world'
-      ])
-      .then(function(res) {
-        var stdout = res[0];
-        var code = res[1];
+test('should handle optional `options`', function (done) {
+  var promise = execCmd('echo', [
+    'hello world'
+  ])
 
-        strictEqual(code, 0);
-        strictEqual(stdout.trim(), 'hello world');
-        done();
-      })
-    });
+  promise
+  .then(function (res) {
+    var stdout = res[0]
+    var code = res[1]
 
-    it('should be hybrid', function(done) {
-      var promise = run('echo', [
-        'hello world'
-      ], function(err, res) {
-        var stdout = res[0];
-        var code = res[1];
-          strictEqual(code, 0);
-        assert(!err)
-        strictEqual(stdout.trim(), 'hello world');
-      })
-      .then(function(res) {
-        var stdout = res[0];
-        var code = res[1];
+    test.equal(code, 0)
+    test.equal(stdout.trim(), 'hello world')
+    done()
+  })
+})
 
-        strictEqual(code, 0);
-        strictEqual(stdout.trim(), 'hello world');
-        done();
-      })
-    });
+test('should be hybrid', function (done) {
+  var cnt = 0
+  var promise = execCmd('echo', [
+    'hello world'
+  ], function (err, res) {
+    var stdout = res[0]
+    var code = res[1]
 
-    it('should pass args to `node fixtures/hello-world.js`', function(done) {
-      var promise = run('node', [
-        './fixtures/hello-world.js', 'hello world'
-      ])
-      .then(function(res) {
-        var stdout = res[0];
-        var code = res[1];
+    test.ifError(err)
+    test.equal(code, 0)
+    test.equal(stdout.trim(), 'hello world')
+    cnt++
+  })
 
-        strictEqual(code, 0);
-        strictEqual(stdout.trim(), 'hello world');
-        done();
-      })
-    });
+  promise
+  .then(function (res) {
+    var stdout = res[0]
+    var code = res[1]
 
-    it('should expand using PATH_EXT properly', function(done) {
-      if (!(process.platform === 'win32')) {
-        return done();
-      }
+    test.equal(code, 0)
+    test.equal(stdout.trim(), 'hello world')
+    test.equal(cnt, 1)
+    done()
+  })
+})
 
-      /* istanbul ignore next */
-      var promise = run(path.join(__dirname, 'fixtures/foo.bat')) // Should expand to foo.bat
-        .then(function(res) {
-          var stdout = res[0];
-          var code = res[1];
+test('should pass args to `node fixtures/hello-world.js`', function (done) {
+  var promise = execCmd('node', [
+    './fixtures/hello-world.js', 'hello world'
+  ])
 
-          strictEqual(code, 0);
-          strictEqual(stdout.trim(), 'foo');
-          done();
-        })
-        .catch(function(err) {
-          notStrictEqual(err, 'foo');
-          notStrictEqual(err, '');
-          done(err);
-        });
-    });
+  promise
+  .then(function (res) {
+    var stdout = res[0]
+    var code = res[1]
 
-    it('should handle multibyte properly', function(done) {
-      var promise = run('node', [
-        path.join(__dirname, 'fixtures/multibyte')
-      ])
-      .then(function(res) {
-        var stdout = res[0];
-        var code = res[1];
+    test.equal(code, 0)
+    test.equal(stdout.trim(), 'hello world')
+    done()
+  })
+})
 
-        strictEqual(code, 0);
-        strictEqual(stdout, 'こんにちは');
-        done();
-      })
-      .catch(function(err) {
-        /* istanbul ignore next */
-        notStrictEqual(err, 'こんにちは');
-        /* istanbul ignore next */
-        notStrictEqual(err, '');
-        /* istanbul ignore next */
-        done(err);
-      });
-    });
+test('should expand using PATH_EXT properly', function (done) {
+  if (process.platform !== 'win32') {
+    return done()
+  }
 
-    it('should fail on error code != 0', function(done) {
-      var promise = run('node', [
-        path.join(__dirname, 'fixtures/fail')
-      ])
-      .then(function(res) {
-        /* istanbul ignore next */
-        var stdout = res[0];
-        /* istanbul ignore next */
-        var code = res[1];
-        /* istanbul ignore next */
-        strictEqual(code, 0);
-        /* istanbul ignore next */
-        strictEqual(res[0], '');
-        /* istanbul ignore next */
-        assert(!code);
-        /* istanbul ignore next */
-        done();
-      })
-      .catch(function(err) {
-        strictEqual(err instanceof Error, true);
-        strictEqual(err.name, 'CommandError');
-        notStrictEqual(err, '');
-        done();
-      });
-    });
-  });
-});
+  /* istanbul ignore next */
+  execCmd(path.join(__dirname, 'fixtures/foo.bat'))
+  .then(function (res) {
+    var stdout = res[0]
+    var code = res[1]
+
+    test.equal(code, 0)
+    test.equal(stdout.trim(), 'foo')
+    done()
+  })
+})
+
+test('should handle multibyte properly', function (done) {
+  var promise = execCmd('node', [
+    path.join(__dirname, 'fixtures/multibyte')
+  ])
+
+  promise
+  .then(function (res) {
+    var stdout = res[0]
+    var code = res[1]
+
+    test.equal(code, 0)
+    test.equal(stdout, 'こんにちは')
+    done()
+  })
+})
+
+test('should fail on error code != 0', function (done) {
+  var promise = execCmd('node', [
+    path.join(__dirname, 'fixtures/fail')
+  ])
+
+  promise
+  .catch(function (err) {
+    test.ifError(!err)
+    test.equal(err instanceof Error, true)
+    test.equal(err.name, 'CommandError')
+    done()
+  })
+})

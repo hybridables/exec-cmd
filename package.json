@@ -1,21 +1,18 @@
 {
   "name": "exec-cmd",
   "version": "2.0.0",
-  "description": "Flexible and cross-platform executing commands. Hybrid. Async and Promise API.",
+  "description": "Flexible and cross-platform executing commands. Hybrid, Async and Promise API.",
   "scripts": {
-    "lint": "jshint index.js && jscs index.js --reporter inline",
-    "test": "mocha",
-    "test-cov": "istanbul cover _mocha",
-    "test-travis": "istanbul cover _mocha --report lcovonly"
+    "test": "standard && node test.js"
   },
   "author": {
-    "name": "Charlike Make Reagent",
+    "name": "Charlike Mike Reagent",
     "email": "mameto_100@mail.bg",
     "url": "https://github.com/tunnckoCore"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hybridables/exec-cmd"
+    "url": "git://github.com/hybridables/exec-cmd.git"
   },
   "keywords": [
     "api",
@@ -50,20 +47,13 @@
   ],
   "license": {
     "type": "MIT",
-    "url": "https://github.com/hybridables/exec-cmd/blob/master/license.md"
+    "url": "https://github.com/hybridables/exec-cmd/blob/master/LICENSE.md"
   },
   "dependencies": {
-    "async-exec-cmd": "~2.0.0",
-    "cleanup-coverage-code": "~1.0.2",
-    "handle-arguments": "~2.0.0",
-    "hybridify": "~1.0.0",
-    "is-empty-function": "~1.0.3",
-    "parse-function": "~2.0.0"
+    "async-exec-cmd": "^2.0.2",
+    "hybridify": "^1.0.9"
   },
   "devDependencies": {
-    "bluebird": "^2.4.1",
-    "istanbul-harmony": "^0.3.1",
-    "mocha": "*",
-    "mocha-lcov-reporter": "0.0.1"
+    "assertit": "^0.1.0"
   }
 }
