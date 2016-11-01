@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "async-exec-cmd": "~2.0.2",
-    "hybridify": "~2.0.0"
+    "hybridify": "~1.0.9"
   },
   "devDependencies": {
     "assertit": "^0.1.0"
